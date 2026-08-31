@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — Rent & Bills Tracker</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="masthead">
+      <div class="masthead-left">
+        <span class="mark">₹</span>
+        <div>
+          <h1>Ledger</h1>
+          <p class="tagline">rent &amp; bills, kept straight</p>
+        </div>
+      </div>
+      <div class="month-picker">
+        <button id="prevMonth" class="month-nav" aria-label="Previous month">&larr;</button>
+        <span id="currentMonth" class="current-month">August 2026</span>
+        <button id="nextMonth" class="month-nav" aria-label="Next month">&rarr;</button>
+      </div>
+    </header>
+
+    <section class="summary-strip">
+      <div class="sum-card">
+        <span class="sum-label">Total due</span>
+        <span class="sum-value" id="totalDue">₹0</span>
+      </div>
+      <div class="sum-card">
+        <span class="sum-label">Paid</span>
+        <span class="sum-value paid" id="totalPaid">₹0</span>
+      </div>
+      <div class="sum-card">
+        <span class="sum-label">Outstanding</span>
+        <span class="sum-value due" id="totalOutstanding">₹0</span>
+      </div>
+      <div class="sum-card">
+        <span class="sum-label">Entries</span>
+        <span class="sum-value" id="entryCount">0</span>
+      </div>
+    </section>
+
+    <section class="add-entry">
+      <form id="entryForm">
+        <input type="text" id="entryName" placeholder="e.g. Rent, Electricity, Wifi" required>
+        <select id="entryCategory">
+          <option value="rent">Rent</option>
+          <option value="electricity">Electricity</option>
+          <option value="water">Water</option>
+          <option value="internet">Internet</option>
+          <option value="gas">Gas</option>
+          <option value="maintenance">Maintenance</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="number" id="entryAmount" placeholder="Amount" min="0" step="0.01" required>
+        <input type="date" id="entryDue">
+        <button type="submit" class="btn-add">+ Add</button>
+      </form>
+    </section>
+
+    <section class="filter-row">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="unpaid">Unpaid</button>
+      <button class="filter-chip" data-filter="paid">Paid</button>
+    </section>
+
+    <section class="ledger">
+      <table id="ledgerTable">
+        <thead>
+          <tr>
+            <th class="col-status"></th>
+            <th class="col-name">Bill</th>
+            <th class="col-cat">Category</th>
+            <th class="col-due">Due</th>
+            <th class="col-amt">Amount</th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody id="ledgerBody">
+        </tbody>
+      </table>
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <p>Nothing logged for this month yet.</p>
+        <span>Add your rent or a bill above to start the ledger.</span>
+      </div>
+    </section>
+
+    <footer class="foot-note">
+      <span>Stored in a local SQLite database on this machine</span>
+      <button id="clearMonth" class="btn-ghost">Clear this month</button>
+    </footer>
+
+  </div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
